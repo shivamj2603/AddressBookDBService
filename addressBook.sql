@@ -48,6 +48,24 @@ select * from addressBook
 where city = 'Mumbai'
 order by firstName, lastName;
 
+#Usecase 9:
+alter table addressbook
+rename to contacts;
+alter table contacts
+drop primary key,
+add contactId int not null auto_increment first, 
+add primary key (contactId);
+create table addressbook
+(
+srNo int not null auto_increment,
+contactId int not null,
+addressbookName varchar(100) not null,
+type varchar(100) not null,
+primary key (srNo),
+foreign key (contactId) references contacts (contactId)
+);
+desc addressbook;
+
 
 
 
