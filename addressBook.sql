@@ -70,6 +70,14 @@ desc addressbook;
 select type, count(*) from addressbook
 group by type;
 
+#Usecase 11:
+insert into addressbook (srNo, contactId, addressbookName, type) values 
+(1, 1, 'AddressBook1', 'family'),
+(1, 2, 'AddressBook1', 'friend'),
+(1, 1,'AddressBook1','friend'),
+(2, 1, 'AddressBook2','friend');
+
+
 
 
 
