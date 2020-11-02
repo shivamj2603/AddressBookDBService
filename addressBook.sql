@@ -19,10 +19,18 @@ primary key (firstname, lastname)
 describe addressBook;
 
 # Usecase 3:
-insert into addressBookTable values
+insert into addressBook values
 ('Shivam', 'Jaiswal', 'Dombivili', 'Mumbai', 'Maharashtra', 421201, 7738454018, 'shivamj2603@gmail.com'),
 ('Suraj', 'Pande', 'Thane', 'Mumbai', 'Maharashtra', 421202, 8958658568, 'suraj@gmail.com'),
 ('Saurabh', 'Pandey', 'Mulund', 'Bangalore', 'Maharashtra', 421203, 34654657657, 'sagar@gmail.com'),
 ('Sagar', 'Sharma', 'Ghatkopar', 'Bangalore', 'Maharashtra', 421204, 534546546, 'ajay@gmail.com'),
 ('Ajay', 'Verma', 'Dadar', 'Dadri', 'Maharashtra', 421205,34546547567 , 'vijay@gmail.com');
+
+#Usecase 4:
+update addressBook
+set phone = '7738454607'
+where firstName = 'Ajay';
+
+
+
 
