@@ -31,6 +31,10 @@ update addressBook
 set phone = '7738454607'
 where firstName = 'Ajay';
 
+# Usecase 6:
+delete from addressBook
+where firstName = 'Ajay';
+
 
 
 
