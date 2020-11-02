@@ -39,6 +39,10 @@ where firstName = 'Ajay';
 select * from addressBook
 where city = 'Mumbai' or state = 'Maharashtra';
 
+# Usecase 7:
+select city, state, count(*) from addressbook 
+group by city, state;
+
 
 
 
