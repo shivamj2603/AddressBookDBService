@@ -43,6 +43,11 @@ where city = 'Mumbai' or state = 'Maharashtra';
 select city, state, count(*) from addressbook 
 group by city, state;
 
+# Usecase 8:
+select * from addressBook
+where city = 'Mumbai'
+order by firstName, lastName;
+
 
 
 
