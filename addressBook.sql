@@ -66,6 +66,10 @@ foreign key (contactId) references contacts (contactId)
 );
 desc addressbook;
 
+# Usecase 10:
+select type, count(*) from addressbook
+group by type;
+
 
 
 
