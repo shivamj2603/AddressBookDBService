@@ -54,14 +54,15 @@ rename to contacts;
 alter table contacts
 drop primary key,
 add contactId int not null auto_increment first, 
-add primary key (contactId);
+add bookcode int not null
+add primary key(contactId);
 create table addressbook
 (
-srNo int not null auto_increment,
+bookcode int not null auto_increment,
 contactId int not null,
 addressbookName varchar(100) not null,
 type varchar(100) not null,
-primary key (srNo),
+primary key (bookcode),
 foreign key (contactId) references contacts (contactId)
 );
 desc addressbook;
@@ -76,6 +77,38 @@ insert into addressbook (srNo, contactId, addressbookName, type) values
 (1, 2, 'AddressBook1', 'friend'),
 (1, 1,'AddressBook1','friend'),
 (2, 1, 'AddressBook2','friend');
+
+#Usecase 12:
+# UC 12
+create table address (
+zip numeric(6) not null,
+city varchar(100) not null,
+state varchar(100) not null,
+foreign key (zip) references contact_table(zip)
+);
+create table addressbookType (
+addressbookName varchar(100) not null,
+type varchar(100) not null,
+foreign key (addressbookName) references addressBook(addressbookName)
+);
+alter table contacts 
+drop column city,
+drop column state;
+alter table addressbook
+drop column type;
+insert into addressbookTypes values 
+('AddressBook1', 'family'),
+('AddressBook2','friend'), 
+('AddressBook3','profession');
+insert into addressbookTypes values 
+(421201, 'Mumbai', 'Maharashtra'),
+(421202, 'Mumbai', 'Maharashtra'),
+(421203, 'Bangalore', 'Maharashtra'),
+(421204 'Bangalore', 'Maharashtra'),
+(421205, 'Dadri', 'Maharashtra');
+
+
+
 
 
 
