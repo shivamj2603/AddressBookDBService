@@ -86,7 +86,7 @@ city varchar(100) not null,
 state varchar(100) not null,
 foreign key (zip) references contact_table(zip)
 );
-create table addressbookType (
+create table addressbookTypes (
 addressbookName varchar(100) not null,
 type varchar(100) not null,
 foreign key (addressbookName) references addressBook(addressbookName)
@@ -106,6 +106,14 @@ insert into addressbookTypes values
 (421203, 'Bangalore', 'Maharashtra'),
 (421204 'Bangalore', 'Maharashtra'),
 (421205, 'Dadri', 'Maharashtra');
+
+# Usecase 13:
+select  contacts.contactId, addressbook.addressbookName, addressbookTypes.type, contacts.firstName, contacts.lastName, 
+contacts.address, address.city, address.state, address.zip, contacts.phone, contacts.email
+from contacts
+inner join address on contacts.zip = address.zip
+inner join addressbook on contacts.contactId = addressbook.contactId
+inner join addressbookTypes on addressbookTypes.addressbookName = addressbook.addressbookName;
 
 
 
