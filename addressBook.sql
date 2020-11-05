@@ -53,67 +53,64 @@ alter table addressbook
 rename to contacts;
 alter table contacts
 drop primary key,
-add contactId int not null auto_increment first, 
-add bookcode int not null
-add primary key(contactId);
+add contactId int not null primary key auto_increment first;
 create table addressbook
 (
-bookcode int not null auto_increment,
-contactId int not null,
+bookid int not null auto_increment,
 addressbookName varchar(100) not null,
 type varchar(100) not null,
-primary key (bookcode),
-foreign key (contactId) references contacts (contactId)
+primary key (bookid)
 );
-desc addressbook;
 
 # Usecase 10:
 select type, count(*) from addressbook
 group by type;
 
 #Usecase 11:
-insert into addressbook (srNo, contactId, addressbookName, type) values 
-(1, 1, 'AddressBook1', 'family'),
-(1, 2, 'AddressBook1', 'friend'),
-(1, 1,'AddressBook1','friend'),
-(2, 1, 'AddressBook2','friend');
+insert into addressbook values  #Adding different type of addressbook
+('AddressBook1', 'family'),
+('AddressBook1', 'friend'),
+('AddressBook1','friend'),
+('AddressBook2','friend');
+create table bookmap(
+contactid int,
+bookid int,
+foreign key(contactid) references contacts(contactid),
+foreign key(bookid) references addressbook(bookid)
+);
 
 #Usecase 12:
 # UC 12
 create table address (
+contactid int not null primary key,
 zip numeric(6) not null,
 city varchar(100) not null,
 state varchar(100) not null,
-foreign key (zip) references contact_table(zip)
-);
-create table addressbookTypes (
-addressbookName varchar(100) not null,
-type varchar(100) not null,
-foreign key (addressbookName) references addressBook(addressbookName)
+foreign key (contactid) references contacts(contactid)
 );
 alter table contacts 
 drop column city,
-drop column state;
+drop column state,
+drop column zip,
+drop column address;
 alter table addressbook
 drop column type;
-insert into addressbookTypes values 
-('AddressBook1', 'family'),
-('AddressBook2','friend'), 
-('AddressBook3','profession');
-insert into addressbookTypes values 
-(421201, 'Mumbai', 'Maharashtra'),
-(421202, 'Mumbai', 'Maharashtra'),
-(421203, 'Bangalore', 'Maharashtra'),
-(421204 'Bangalore', 'Maharashtra'),
-(421205, 'Dadri', 'Maharashtra');
+insert into bookmap values 
+(1,1),
+(1,2), 
+(2,1);
+insert into address values 
+(1,421201, 'Mumbai', 'Maharashtra'),
+(2,421202, 'Mumbai', 'Maharashtra'),
+(3.421203, 'Bangalore', 'Maharashtra'),
+(4,421204, 'Bangalore', 'Maharashtra'),
+(5,421205, 'Dadri', 'Maharashtra');
 
 # Usecase 13:
-select  contacts.contactId, addressbook.addressbookName, addressbookTypes.type, contacts.firstName, contacts.lastName, 
-contacts.address, address.city, address.state, address.zip, contacts.phone, contacts.email
-from contacts
-inner join address on contacts.zip = address.zip
-inner join addressbook on contacts.contactId = addressbook.contactId
-inner join addressbookTypes on addressbookTypes.addressbookName = addressbook.addressbookName;
+select  * from contacts
+inner join address on contacts.contactid = address.contactid
+inner join bookmap on contacts.contactId = bookmap.contactId
+inner join addressbook on bookmap.bookid = addressbook.bookid;
 
 
 
